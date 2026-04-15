@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head><title>Login</title></head>
+<body>
+  <h1 id="page-title">Login</h1>
+  <% if (error) { %><p id="error-msg" style="color:red"><%= error %></p><% } %>
+  <% if (success) { %><p id="success-msg" style="color:green"><%= success %></p><% } %>
+  <form id="login-form" action="/login" method="POST">
+    <input id="email" name="email" type="text" placeholder="Email" />
+    <input id="password" name="password" type="password" placeholder="Password" />
+    <button id="login-btn" type="submit">Login</button>
+  </form>
+  <a id="signup-link" href="/signup">Create an account</a>
+</body>
+</html>
