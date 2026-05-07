@@ -1,7 +1,21 @@
 # Node.js Authentication App — Mocha/Chai + Jenkins CI
 
+## Submission Links
+
+- **GitHub Repository:** <!-- PASTE YOUR GITHUB REPO LINK HERE -->
+  `https://github.com/<your-username>/<your-repo>`
+- **Demo Video:** <!-- PASTE YOUR VIDEO LINK HERE -->
+  `https://drive.google.com/...`
+
+## Author
+- **Name:** Saad Zafar
+- **Roll No:** 22F-3371
+- **Submission Date:** 2026-04-15
+
+---
+
 ## Project Overview
-A Node.js + Express authentication system supporting user **Signup**, **Login**, and a session-protected **Dashboard**. Views are rendered with EJS. All form inputs are validated by a dedicated validator module.
+A Node.js + Express authentication system supporting **Signup**, **Login**, and a session-protected **Dashboard**. Views are rendered with EJS. All form inputs are validated by a dedicated validator module.
 
 ## Testing Purpose
 Automation ensures that authentication (the most security-critical flow) works reliably on every change. Unit tests lock down validation logic; integration tests simulate real user interaction with the UI forms through the Page Object Model (POM); a Jenkins pipeline runs everything on each commit.
@@ -48,10 +62,10 @@ Pages: `/login`, `/signup`.
 npm test                 # all tests
 npm run test:unit        # unit tests only
 npm run test:integration # integration tests only
-npm run test:report      # generate reports/test-report.html
+npm run test:report      # generates reports/test-report.html
 ```
 
-## Page Object Model
+## Page Object Model (POM)
 - `tests/pages/BasePage.js` — shared cheerio/supertest helpers.
 - `tests/pages/LoginPage.js` — `visit()`, `login(email, password)`, `isLoggedIn()`, `getErrorMessage()`.
 - `tests/pages/SignupPage.js` — `visit()`, `signup(username, email, password)`, `isSuccess()`, `getErrorMessage()`.
@@ -67,6 +81,7 @@ Each page object encapsulates **locators** (`#email`, `#password`, `#login-btn`,
 | **Total**         | **35**| **Pass** |
 
 ### Coverage
+
 **Unit — Validation Logic**
 - Email: valid, missing `@`, missing domain, empty, null
 - Password: valid, boundary 6-char, short, empty
@@ -110,11 +125,13 @@ Stages defined in `Jenkinsfile`:
 Post-build actions handle success/failure messaging. Required plugins: **NodeJS**, **HTML Publisher**, **Git**. Configure Node.js v18.x under *Manage Jenkins → Tools* as `NodeJS-18`.
 
 ## Screenshots
-Place in `docs/screenshots/`:
+Located in `docs/screenshots/`:
 - `local-tests.png` — all tests passing locally
-- `jenkins-build.png` — successful Jenkins build
-- `jenkins-report.png` — published HTML report
+- `jenkins-build.png` — successful Jenkins build with 5 green stages
+- `jenkins-report.png` — published Mocha HTML report
 
-## Author
-- **Name:** Saad Zafar
-- **Submission Date:** 2026-04-15
+## Key Learnings
+- **POM** made tests maintainable — locators and actions are centralized.
+- **Supertest + Cheerio** enabled realistic UI-level testing without a real browser/driver.
+- **Jenkins pipelines** catch regressions early and publish reports automatically.
+- Separating **unit** and **integration** tests keeps feedback fast while still validating end-to-end behavior.
